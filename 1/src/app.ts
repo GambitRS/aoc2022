@@ -1,13 +1,11 @@
 import {promises as fs} from 'fs';
 
 const text = await fs.readFile("./data/data.txt");
-const data : String = text.toString();
-const lines = data.split(/\r?\n/);
+const lines = text.toString().split(/\r?\n/);
 const dwarves : number[] = [];
 let curDwarf : number = 0;
 
-for (const line of lines) {
-    
+for (const line of lines) {    
     if(line == "" || line == null) {
         dwarves.push(curDwarf);
         curDwarf = 0;
@@ -15,9 +13,10 @@ for (const line of lines) {
         curDwarf += +line;
     }
 }
-if(curDwarf > 0) {
-    dwarves.push(curDwarf);
-}
-
+dwarves.push(curDwarf);
 dwarves.sort((a,b) => b-a);
+
+console.log("1")
+console.log(dwarves[0]);
+console.log("2")
 console.log(dwarves[0] + dwarves[1] + dwarves[2]);

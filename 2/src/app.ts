@@ -3,99 +3,17 @@ import {promises as fs} from 'fs';
 const text = await fs.readFile("./data/data.txt");
 const data : String = text.toString();
 const lines = data.split(/\r?\n/);
-let score : number = 0;
 
-for (const line of lines) {
-    
-    var hands = line.split(" ");
-    switch(hands[0]) {
-        case 'A': {
-            if(hands[1] == "X") {
-                score += 4;
-            }
-            if(hands[1] == "Y") {
-                score += 8;
-            }
-            if(hands[1] == "Z") {
-                score += 3;
-            }
-            break;
-        }
-        case 'B': {
-            if(hands[1] == "X") {
-                score += 1;
-            }
-            if(hands[1] == "Y") {
-                score += 5;
-            }
-            if(hands[1] == "Z") {
-                score += 9;
-            }
-            break;
-        }
-        case 'C': {
-            if(hands[1] == "X") {
-                score += 7;
-            }
-            if(hands[1] == "Y") {
-                score += 2;
-            }
-            if(hands[1] == "Z") {
-                score += 6;
-            }
-            break;
-        }
+function solve(scoring : Object) {
+    let score : number = 0;
+
+    for (const line of lines) {
+        let hands = line.split(" ");
+        score += scoring[hands[0]][hands[1]];
     }
-}
-console.log("1:-----");
-console.log(score);
-console.log("-------");
-console.log("");
 
-score = 0;
-
-for (const line of lines) {
-    
-    var hands = line.split(" ");
-    switch(hands[0]) {
-        case 'A': {
-            if(hands[1] == "X") {
-                score += 3;
-            }
-            if(hands[1] == "Y") {
-                score += 4;
-            }
-            if(hands[1] == "Z") {
-                score += 8;
-            }
-            break;
-        }
-        case 'B': {
-            if(hands[1] == "X") {
-                score += 1;
-            }
-            if(hands[1] == "Y") {
-                score += 5;
-            }
-            if(hands[1] == "Z") {
-                score += 9;
-            }
-            break;
-        }
-        case 'C': {
-            if(hands[1] == "X") {
-                score += 2;
-            }
-            if(hands[1] == "Y") {
-                score += 6;
-            }
-            if(hands[1] == "Z") {
-                score += 7;
-            }
-            break;
-        }
-    }
+    return score;
 }
-console.log("2:-----");
-console.log(score);
-console.log("-------");
+
+console.log( solve({ A:{X:4,Y:8,Z:3}, B:{X:1,Y:5,Z:9}, C:{X:7,Y:2,Z:6}}) );
+console.log( solve({ A:{X:3,Y:4,Z:8}, B:{X:1,Y:5,Z:9}, C:{X:2,Y:6,Z:7}}) );
