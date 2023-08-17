@@ -11,11 +11,9 @@ const solveArray = (a) => a.map((a) => a.map((a) => new Set(a))
     .map((a) => (a.charCodeAt(0) > 90) ? a.charCodeAt(0) - 96 : a.charCodeAt(0) - 38)
     .reduce((a, b) => a + b);
 //map reduce style
-var sol1 = Array.from(data.matchAll(/.+/g))
+console.log(solveArray(Array.from(data.matchAll(/.+/g))
     .map(String)
-    .map((a) => [a.slice(0, a.length / 2), a.slice(a.length / 2, a.length)]);
-console.log(solveArray(sol1));
-var sol2 = Array.from(data.matchAll(/.+\r?\n.+\r?\n.+/g))
-    .map((a) => String(a).split(/\r?\n/));
-console.log(solveArray(sol2));
+    .map((a) => [a.slice(0, a.length / 2), a.slice(a.length / 2, a.length)])));
+console.log(solveArray(Array.from(data.matchAll(/.+\r?\n.+\r?\n.+/g))
+    .map((a) => String(a).split(/\r?\n/))));
 //# sourceMappingURL=app.js.map

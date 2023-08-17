@@ -16,13 +16,9 @@ const solveArray = (a : string[][]) =>
     .reduce((a,b)=>a+b);
 
 //map reduce style
-var sol1 = Array.from(data.matchAll(/.+/g))
+console.log(solveArray(Array.from(data.matchAll(/.+/g))
     .map(String)        
-    .map((a)=>[a.slice(0,a.length/2), a.slice(a.length/2, a.length)]);
+    .map((a)=>[a.slice(0,a.length/2), a.slice(a.length/2, a.length)])));
 
-console.log(solveArray(sol1));
-
-var sol2 = Array.from(data.matchAll(/.+\r?\n.+\r?\n.+/g))        
-    .map((a)=>String(a).split(/\r?\n/));
-
-console.log(solveArray(sol2));
+console.log(solveArray(Array.from(data.matchAll(/.+\r?\n.+\r?\n.+/g))        
+    .map((a)=>String(a).split(/\r?\n/))));
