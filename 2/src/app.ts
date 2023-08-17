@@ -1,6 +1,9 @@
 import {promises as fs} from 'fs';
+import * as url from 'url';
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const text = await fs.readFile("./data/data.txt");
+const text = await fs.readFile(__dirname + "../data/data.txt");
 const data : String = text.toString();
 const lines = data.split(/\r?\n/);
 

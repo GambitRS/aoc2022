@@ -1,18 +1,14 @@
 import {promises as fs} from 'fs';
+import * as url from 'url';
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-const text = await fs.readFile("./data/data.txt");
+const text = await fs.readFile(__dirname + "../data/data.txt");
 const data : String = text.toString();
 const lines = data.split(/\r?\n/);
 
 function solve(scoring : Object) {
-    let score : number = 0;
-
-    for (const line of lines) {
-        let hands = line.split(" ");
-        score += scoring[hands[0]][hands[1]];
-    }
-
-    return score;
+    
 }
 
 console.log( solve({ A:{X:4,Y:8,Z:3}, B:{X:1,Y:5,Z:9}, C:{X:7,Y:2,Z:6}}) );
