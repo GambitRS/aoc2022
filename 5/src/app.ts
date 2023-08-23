@@ -6,14 +6,14 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const dataFile = await fs.readFile(__dirname + "../data/data.txt");
 const data = dataFile.toString();
 
-const exampleFile = await fs.readFile(__dirname + "../data/data.txt");
+const exampleFile = await fs.readFile(__dirname + "../data/example.txt");
 const example = exampleFile.toString();
 
 const contains = ((c:number[],d:number[]) => (c[0] >= d[0] && c[1] <= d[1]) );
 const overlaps = ((c:number[],d:number[]) => !((c[0] < d[0] && c[1] < d[0]) || (c[0] > d[1] && c[1] > d[1])) );
-const sum = (a,b)=>a+b;
+const sum = (a:any,b:any)=>a+b;
 
-const instructions = example.split(/\r?\n\r?\n/g);
+const instructions = data.split(/\r?\n\r?\n/g);
 const cargo = instructions[0];
 const commands = instructions[1].split(/\r?\n/g).map((a)=>Array.from(a.matchAll(/\d+/g)).map(Number));
 const boxes = cargo.split(/\r?\n 1 /)[0];
@@ -21,11 +21,8 @@ const boxLines = boxes.split(/\r?\n/);
 let places : string[] = [];
 
 const moveBoxes9000 = (a : number[]) => {
-    //console.log(places);
-    //console.log(a);
     places[a[2]-1] = places[a[1]-1].substring(0,a[0]).split("").reverse().join("") + places[a[2]-1];
     places[a[1]-1] = places[a[1]-1].substring(a[0]);
-    //console.log(places);
 }
 
 const moveBoxes9001 = (a : number[]) => {
@@ -49,7 +46,7 @@ for( let objects of lines ) {
 
 let places2 = places.slice();
 commands.map(moveBoxes9000);
-let answer = places.map((a)=>a.substring(0,1)).reduce((a,b)=>a+b);
+let answer = places.map((a)=>a.substring(0,1)).reduce(sum);
 
 console.timeEnd("1 star");
 console.log(answer);
@@ -58,6 +55,6 @@ console.log(answer);
 console.time("2 stars");
 places = places2;
 commands.map(moveBoxes9001);
-let answer2 = places.map((a)=>a.substring(0,1)).reduce((a,b)=>a+b);
+let answer2 = places.map((a)=>a.substring(0,1)).reduce(sum);
 console.timeEnd("2 stars");
 console.log(answer2);
